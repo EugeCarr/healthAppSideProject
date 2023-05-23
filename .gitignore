@@ -1,2 +1,4 @@
 .env
 healthAppVenv/
+healthapp/healthapp/__pycache__/
+db.sqlite3
