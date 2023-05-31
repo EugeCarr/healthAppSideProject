@@ -16,31 +16,31 @@ class Dietician(models.Model):
     lastName = models.CharField(max_length=255, null=True, verbose_name="Last Name")
     title = models.CharField(max_length=50, null=True, verbose_name="Title")
 
-class Diet(models.Model):
-    dietNum = models.AutoField(primary_key=True, verbose_name="Diet Number")
-    dietName = models.CharField(max_length=255, null= False, verbose_name="Diet Name")
-    patNum = models.ForeignKey("Patient", on_delete=models.CASCADE, verbose_name="Patient")
-    dieticianId = models.ForeignKey("Dietician", on_delete=models.CASCADE, verbose_name="Dietician")
-    startDate = models.DateField(verbose_name="Start Date")
-    endDate = models.DateField(verbose_name="End Date")
-    dailyCalories = models.IntegerField(verbose_name="Calorie target")
-    targetWeight = models.DecimalField(decimal_places=1, verbose_name="Target weight")
+# class Diet(models.Model):
+#     dietNum = models.AutoField(primary_key=True, verbose_name="Diet Number")
+#     dietName = models.CharField(max_length=255, null= False, verbose_name="Diet Name")
+#     patNum = models.ForeignKey("Patient", on_delete=models.CASCADE, verbose_name="Patient")
+#     dieticianId = models.ForeignKey("Dietician", on_delete=models.CASCADE, verbose_name="Dietician")
+#     startDate = models.DateField(verbose_name="Start Date")
+#     endDate = models.DateField(verbose_name="End Date")
+#     dailyCalories = models.IntegerField(verbose_name="Calorie target")
+#     targetWeight = models.DecimalField(decimal_places=1, verbose_name="Target weight")
 
-class Meal(models.Model):
-    mealNum = models.AutoField(primary_key=True, verbose_name="Meal Number")
-    mealName = models.CharField(max_length=255)
-    dietNum = models.ForeignKey("Diet", on_delete=models.CASCADE, verbose_name="Diet")
+# class Meal(models.Model):
+#     mealNum = models.AutoField(primary_key=True, verbose_name="Meal Number")
+#     mealName = models.CharField(max_length=255)
+#     dietNum = models.ForeignKey("Diet", on_delete=models.CASCADE, verbose_name="Diet")
     
 
-class FoodItem(models.Model):
-    foodDocId = models.IntegerField(primary_key=True, verbose_name="Food Doc Id", unique=True)
-    calories = models.IntegerField()
-    protein = models.IntegerField()
-    fat = models.IntegerField()
+# class FoodItem(models.Model):
+#     foodDocId = models.IntegerField(primary_key=True, verbose_name="Food Doc Id", unique=True)
+#     calories = models.IntegerField()
+#     protein = models.IntegerField()
+#     fat = models.IntegerField()
 
-class FoodItemMealMap(models.Model):
-    mealNum = models.ForeignKey("Meal", on_delete=models.CASCADE, verbose_name="Meal")
-    foodItem = models.ForeignKey("Food Item", on_delete=models.CASCADE, verbose_name="Food Item")
+# class FoodItemMealMap(models.Model):
+#     mealNum = models.ForeignKey("Meal", on_delete=models.CASCADE, verbose_name="Meal")
+#     foodItem = models.ForeignKey("Food Item", on_delete=models.CASCADE, verbose_name="Food Item")
 
 
 
