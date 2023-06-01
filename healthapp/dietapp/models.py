@@ -7,8 +7,8 @@ class Patient(models.Model):
     age = models.IntegerField(verbose_name="Age")
     checkedIn = models.BooleanField()
     gender = models.CharField(max_length=100)
-    weight = models.DecimalField(decimal_places=1,)
-    height = models.DecimalField(decimal_places=1)
+    weight = models.DecimalField(max_digits=1, decimal_places=1,)
+    height = models.DecimalField(max_digits=1, decimal_places=1)
 
 class Dietician(models.Model):
     dieticianNum = models.AutoField(primary_key=True, verbose_name="Dietician Number")
@@ -24,7 +24,7 @@ class Diet(models.Model):
     startDate = models.DateField(verbose_name="Start Date")
     endDate = models.DateField(verbose_name="End Date")
     dailyCalories = models.IntegerField(verbose_name="Calorie target")
-    targetWeight = models.DecimalField(decimal_places=1, verbose_name="Target weight")
+    targetWeight = models.DecimalField(max_digits=1, decimal_places=1, verbose_name="Target weight")
 
 class Meal(models.Model):
     mealNum = models.AutoField(primary_key=True, verbose_name="Meal Number")
@@ -40,4 +40,4 @@ class FoodItem(models.Model):
 
 class FoodItemMealMap(models.Model):
     mealNum = models.ForeignKey("Meal", on_delete=models.CASCADE, verbose_name="Meal")
-    foodItem = models.ForeignKey("Food Item", on_delete=models.CASCADE, verbose_name="Food Item")
+    foodItem = models.ForeignKey("FoodItem", on_delete=models.CASCADE, verbose_name="Food Item")
