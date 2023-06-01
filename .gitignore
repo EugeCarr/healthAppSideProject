@@ -2,3 +2,4 @@
 healthAppVenv/
 healthapp/healthapp/__pycache__/
 db.sqlite3
+healthapp/dietapp/__pycache__/
