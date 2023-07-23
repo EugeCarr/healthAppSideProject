@@ -1,7 +1,7 @@
 from django.db import models
 
 class Patient(models.Model):
-    patNum = models.AutoField(primary_key=True, verbose_name="Patient Number")
+    id = models.AutoField(primary_key=True, verbose_name="Patient Number")
     firstName = models.CharField(max_length=255, null=True, verbose_name="First Name")
     lastName = models.CharField(max_length=255, null=True, verbose_name="Last Name")
     age = models.IntegerField(verbose_name="Age")
@@ -11,33 +11,34 @@ class Patient(models.Model):
     height = models.DecimalField(max_digits=1, decimal_places=1)
 
 class Dietician(models.Model):
-    dieticianNum = models.AutoField(primary_key=True, verbose_name="Dietician Number")
+    id = models.AutoField(primary_key=True, verbose_name="Dietician Number")
     firstName = models.CharField(max_length=255, null=True, verbose_name="First Name")
     lastName = models.CharField(max_length=255, null=True, verbose_name="Last Name")
     title = models.CharField(max_length=50, null=True, verbose_name="Title")
 
 class Diet(models.Model):
-    dietNum = models.AutoField(primary_key=True, verbose_name="Diet Number")
+    id = models.AutoField(primary_key=True, verbose_name="Diet Number")
     dietName = models.CharField(max_length=255, null= False, verbose_name="Diet Name")
-    patNum = models.ForeignKey("Patient", on_delete=models.CASCADE, verbose_name="Patient")
-    dieticianId = models.ForeignKey("Dietician", on_delete=models.CASCADE, verbose_name="Dietician")
+    patientId = models.ForeignKey(to="Patient", to_field="id", on_delete=models.CASCADE, verbose_name="Patient")
+    dieticianId = models.ForeignKey(to="Dietician", to_field="id", on_delete=models.CASCADE, verbose_name="Dietician")
     startDate = models.DateField(verbose_name="Start Date")
     endDate = models.DateField(verbose_name="End Date")
     dailyCalories = models.IntegerField(verbose_name="Calorie target")
     targetWeight = models.DecimalField(max_digits=1, decimal_places=1, verbose_name="Target weight")
 
 class Meal(models.Model):
-    mealNum = models.AutoField(primary_key=True, verbose_name="Meal Number")
+    id = models.AutoField(primary_key=True, verbose_name="Meal Number")
     mealName = models.CharField(max_length=255)
-    dietNum = models.ForeignKey("Diet", on_delete=models.CASCADE, verbose_name="Diet")
+    dietNum = models.ForeignKey(to="Diet", on_delete=models.CASCADE, to_field="id", verbose_name="Diet")
     
 
 class FoodItem(models.Model):
-    foodDocId = models.IntegerField(primary_key=True, verbose_name="Food Doc Id", unique=True)
+    id = models.IntegerField(primary_key=True, verbose_name="Food Doc Id", unique=True)
     calories = models.IntegerField()
     protein = models.IntegerField()
     fat = models.IntegerField()
 
 class FoodItemMealMap(models.Model):
-    mealNum = models.ForeignKey("Meal", on_delete=models.CASCADE, verbose_name="Meal")
-    foodItem = models.ForeignKey("FoodItem", on_delete=models.CASCADE, verbose_name="Food Item")
+    id = models.IntegerField(primary_key=True, verbose_name="Food Item Meal Id", unique=True,)
+    mealId = models.ForeignKey(to="Meal", on_delete=models.CASCADE, verbose_name="Meal", to_field="id")
+    foodItemId = models.ForeignKey(to="FoodItem", on_delete=models.CASCADE, verbose_name="Food Item", to_field="id")
