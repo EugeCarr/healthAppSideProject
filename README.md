@@ -1,2 +1,2 @@
 # healthAppSideProject
-Health application made with Django, using health and nuttition data
+Health application made with Django, using health and nutrition data
